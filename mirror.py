@@ -41,3 +41,4 @@ def on_info(server, info):
 		if system_type==1:
 			os.system('cd mirror && python ./MCDReforged.py')
 		os.system('cd ..')
+		server.say('镜像服已关闭！')
