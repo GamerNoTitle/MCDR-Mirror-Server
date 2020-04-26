@@ -4,6 +4,7 @@ import shutil
 import datetime
 import os
 system_type=0	# 0为linux，1为windows
+mirror_folder='./mirror/'	# 在这里设置镜像服的文件夹，默认为./mirror/
 help_msg='''
 §r======= §6Minecraft Mirror 镜像服插件 §r=======
 使用§6!!mirror sync§r来同步主服务器到镜像服
@@ -15,7 +16,8 @@ help_msg='''
 SimpleOP=' {"text":"§6查看SimpleOP","clickEvent":{"action":"open_url","value":"https://github.com/GamerNoTitle/SimpleOP"}}'
 StartStopHelper=' {"text":"§6查看StartStopHelper","clickEvent":{"action":"open_url","value":"https://github.com/MCDReforged-Plugins/StartStopHelper"}}'
 source='./server/world'
-target='./mirror/server/world'
+target=('{}server/world'.format(mirror_folder))
+print(target)
 def on_info(server, info):
 	if info.is_player and info.content == '!!mirror':
 		server.tell(info.player, help_msg)
@@ -41,4 +43,4 @@ def on_info(server, info):
 		if system_type==1:
 			os.system('cd mirror && python ./MCDReforged.py')
 		os.system('cd ..')
-		server.say('镜像服已关闭！')
+		server.say('镜像服已关闭！如果你一打开镜像服就弹出本提示请查看后台命令行输出的错误！')
