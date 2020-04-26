@@ -17,7 +17,6 @@ SimpleOP=' {"text":"§6查看SimpleOP","clickEvent":{"action":"open_url","value"
 StartStopHelper=' {"text":"§6查看StartStopHelper","clickEvent":{"action":"open_url","value":"https://github.com/MCDReforged-Plugins/StartStopHelper"}}'
 source='./server/world'
 target=('{}server/world'.format(mirror_folder))
-print(target)
 def on_info(server, info):
 	if info.is_player and info.content == '!!mirror':
 		server.tell(info.player, help_msg)
@@ -37,10 +36,10 @@ def on_info(server, info):
 		server.say('同步完成！用时{}'.format(end_time-start_time))
 
 	if info.content == '!!mirror start':
-		server.say('已执行镜像服开启操作')
+		server.say('已执行镜像服开启操作！镜像服开启用时由服务器决定，一般为1~3分钟')
 		if system_type==0:
 			os.system('cd mirror && python3 ./MCDReforged.py')
 		if system_type==1:
 			os.system('cd mirror && python ./MCDReforged.py')
 		os.system('cd ..')
-		server.say('镜像服已关闭！如果你一打开镜像服就弹出本提示请查看后台命令行输出的错误！')
+		server.say('镜像服已关闭！')
