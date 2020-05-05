@@ -3,8 +3,9 @@ import time
 import shutil
 import datetime
 import os
-system_type=0	# 0为linux，1为windows
-mirror_folder='./mirror/'	# 在这里设置镜像服的文件夹，默认为./mirror/
+system_type=0	# 0 for linux, 1 for windows
+mirror_folder='./mirror/'	# Setting up your mirror folder here
+language='zh-CN'	# zh-CN/en is avaliable
 help_msg='''
 §r======= §6Minecraft Mirror 镜像服插件 §r=======
 使用§6!!mirror sync§r来同步主服务器到镜像服
@@ -13,33 +14,61 @@ help_msg='''
 §4无需MCDR-Admin权限的§6SimpleOP
 §4或者需要MCDR-Admin权限的§6StartStopHelper
 '''
+help_msg_en='''
+§r======= §6Minecraft Mirror Plugin §r=======
+Use §6!!mirror sync§r to sync the main server's world to the mirror one
+Use §6!!mirror start§r to turn on the mirror server
+§4CAUTIONS: YOU CAN ONLY TURN OFF THE MIRROR SERVER INSIDE
+§4IF YOU WANT TO DO THAT, YOU CAN TRY THE PLUGIN
+§6SimpleOP §rwithout MCDR-Admin permission required
+§6StartStopHelper §r with MCDR-Admin permission required
+'''
 SimpleOP=' {"text":"§6查看SimpleOP","clickEvent":{"action":"open_url","value":"https://github.com/GamerNoTitle/SimpleOP"}}'
 StartStopHelper=' {"text":"§6查看StartStopHelper","clickEvent":{"action":"open_url","value":"https://github.com/MCDReforged-Plugins/StartStopHelper"}}'
+SimpleOP_en=' {"text":"§6Checkout SimpleOP","clickEvent":{"action":"open_url","value":"https://github.com/GamerNoTitle/SimpleOP"}}'
+StartStopHelper_en=' {"text":"§6Checkout StartStopHelper","clickEvent":{"action":"open_url","value":"https://github.com/MCDReforged-Plugins/StartStopHelper"}}'
 source='./server/world'
 target=('{}server/world'.format(mirror_folder))
 def on_info(server, info):
 	if info.is_player and info.content == '!!mirror':
-		server.tell(info.player, help_msg)
-		server.execute('tellraw '+ info.player + SimpleOP)
-		server.execute('tellraw '+ info.player + StartStopHelper)
+		if language=='zh-CN':
+			server.tell(info.player, help_msg)
+			server.execute('tellraw '+ info.player + SimpleOP)
+			server.execute('tellraw '+ info.player + StartStopHelper)
+		else:
+			server.tell(info.player, help_msg_en)
+			server.execute('tellraw '+ info.player + SimpleOP_en)
+			server.execute('tellraw '+ info.player + StartStopHelper_en)
 
 	if info.content == '!!mirror sync':
 		start_time=datetime.datetime.now()
 		server.execute('save-all')
-		server.say('正在同步到镜像服……')
+		if language=='zh-CN':
+			server.say('正在同步到镜像服……')
+		else:
+			server.say('Syncing...Please Wait...')
 		try:
 			shutil.copytree(source,target)
 		except:
 			shutil.rmtree(target,True)
 			shutil.copytree(source,target)
 		end_time=datetime.datetime.now()
-		server.say('同步完成！用时{}'.format(end_time-start_time))
+		if language=='zh-CN':
+			server.say('同步完成！用时{}'.format(end_time-start_time))
+		else:
+			server.say('Finished the opreation in {}'.format(end_time-start_time))
 
 	if info.content == '!!mirror start':
-		server.say('已执行镜像服开启操作！镜像服开启用时由服务器决定，一般为1~3分钟')
+		if language=='zh-CN':
+			server.say('已执行镜像服开启操作！镜像服开启用时由服务器决定，一般为1~3分钟')
+		else:
+			server.say('Now starting the server, please wait...The time for the server\'s start depends on the server')
 		if system_type==0:
 			os.system('cd mirror && python3 ./MCDReforged.py')
 		if system_type==1:
 			os.system('cd mirror && python ./MCDReforged.py')
 		os.system('cd ..')
-		server.say('镜像服已关闭！')
+		if language=='zh-CN':
+			server.say('镜像服已关闭！')
+		else:
+			server.say('Mirror Server has been terminated!')
