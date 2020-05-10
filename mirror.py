@@ -3,9 +3,13 @@ import time
 import shutil
 import datetime
 import os
-system_type=0	# 0 for linux, 1 for windows
+
+system_type=1	# 0 for linux, 1 for windows
 mirror_folder='./mirror/'	# Setting up your mirror folder here
 language='zh-CN'	# zh-CN/en is avaliable
+server_type=1	# 0 for Vanilla or Forge/Fabric based on Vanilla, Others like sponge/bukkit please change it to 1
+				# or CHECKOUT YOUR WORLD FOLDER, if there's just one folder named world then set it to 0, or set it to 1
+
 help_msg='''
 §r======= §6Minecraft Mirror 镜像服插件 §r=======
 使用§6!!mirror sync§r来同步主服务器到镜像服
@@ -28,7 +32,11 @@ StartStopHelper=' {"text":"§6查看StartStopHelper","clickEvent":{"action":"ope
 SimpleOP_en=' {"text":"§6Checkout SimpleOP","clickEvent":{"action":"open_url","value":"https://github.com/GamerNoTitle/SimpleOP"}}'
 StartStopHelper_en=' {"text":"§6Checkout StartStopHelper","clickEvent":{"action":"open_url","value":"https://github.com/MCDReforged-Plugins/StartStopHelper"}}'
 source='./server/world'
+source_nether='./server/world_nether'
+source_the_end='./server/world_the_end'
 target=('{}server/world'.format(mirror_folder))
+target_nether=('{}server/world_nether'.format(mirror_folder))
+target_the_end=('{}server/world_the_end'.format(mirror_folder))
 def on_info(server, info):
 	if info.is_player and info.content == '!!mirror':
 		if language=='zh-CN':
@@ -47,11 +55,24 @@ def on_info(server, info):
 			server.say('正在同步到镜像服……')
 		else:
 			server.say('Syncing...Please Wait...')
-		try:
-			shutil.copytree(source,target)
-		except:
-			shutil.rmtree(target,True)
-			shutil.copytree(source,target)
+		if server_type!=0:
+			try:
+				shutil.copytree(source,target)
+				shutil.copytree(source_nether,target_nether)
+				shutil.copytree(source_the_end,target_the_end)
+			except:
+				shutil.rmtree(target,True)
+				shutil.rmtree(target_nether,True)
+				shutil.rmtree(target_the_end,True)
+				shutil.copytree(source,target)
+				shutil.copytree(source_nether,target_nether)
+				shutil.copytree(source_the_end,target_the_end)
+		else:
+			try:
+				shutil.copytree(source,target)
+			except:
+				shutil.rmtree(target,True)
+				shutil.copytree(source,target)
 		end_time=datetime.datetime.now()
 		if language=='zh-CN':
 			server.say('同步完成！用时{}'.format(end_time-start_time))
