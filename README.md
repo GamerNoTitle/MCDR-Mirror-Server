@@ -1,6 +1,6 @@
 # MCDR-Mirror-Server
 
-[ENGLISH](#English%20Users)
+[ENGLISH](#English)
 
 这是一个能够让你在MCDR的帮助下开镜像服便于调试的插件（仅支持python3）
 
@@ -51,7 +51,7 @@
 
 ---
 
-# English Users
+# English
 
 This is a plugin can help you turn on another mirror server for you to debug or design (**Python3 ONLY**)
 
