@@ -18,12 +18,12 @@
 
 你需要完成以下操作：
 
-- (可选)设定你的镜像服文件夹，默认为mirror
+- (可选)在`mirror.json`设定你的镜像服文件夹，默认为mirror
 - 复制整个MCDR服务器到你设置的文件夹内（默认为mirror）
 - 配置镜像服的服务器端口
 - 配置镜像服的rcon端口
-- 打开配置文件`mirror.json`，在`system_type`变量设置自己的系统类型：0为Linux（默认），1为Windows
-- 在`server_type`变量设置自己的服务器类型，MC原版服务器及基于其的核心（世界文件夹只有`world`）选择0；Spigot/bukkit类核心（世界文件夹有`world`/`world_nether`/`world_the_end`的）选择1。如果你输入了非法的选项，那么会被当做`Spigot/Bukkit`类处理
+- 打开配置文件`mirror.json`，在`system`变量设置自己的系统类型：0为Linux（默认），1为Windows
+- 在`server`变量设置自己的服务器类型，MC原版服务器及基于其的核心（世界文件夹只有`world`）选择0；Spigot/bukkit类核心（世界文件夹有`world`/`world_nether`/`world_the_end`的）选择1。如果你输入了非法的选项，那么会被当做`Spigot/Bukkit`类处理
 
 目录树大致如下
 
@@ -69,13 +69,13 @@ If you want to turn off or restart the mirror server, there're two ways to do th
 
 You need to do the following things:
 
-- (Optional) Setting up your mirror server folder at the varible `mirror_folder` (mirror as default)
+- (Optional) Setting up your mirror server folder at the varible `mirror` (mirror as default) in json file
 - Copy all the files in your MCDR (`server` `plugins` etc.) into the mirror folder
 - Change the port of the server to another one without conflict
 - Change the port of the rcon to another one without conflict if you use it
 - Change the rcon port writing in the MCDR config into your setting if you use it
-- Open `mirror.json` file, set the `system_type` varible into the type you use (0 for linux as default, 1 for windows)
-- Set `server_type` into correct type: Vanilla or Vanilla-Based core like Fabric/Forge that the world folder only has `world` folder please choose `0`, others like Spigot/Bukkit that the world folder has `world`/`world_nether`/`world_the_end` or others please choose `1`. If you type an invalid number it will use `1` as default
+- Open `mirror.json` file, set the `system` varible into the type you use (0 for linux as default, 1 for windows)
+- Set `server` into correct type: Vanilla or Vanilla-Based core like Fabric/Forge that the world folder only has `world` folder please choose `0`, others like Spigot/Bukkit that the world folder has `world`/`world_nether`/`world_the_end` or others please choose `1`. If you type an invalid number it will use `1` as default
 
 Your file should like the following tree
 
