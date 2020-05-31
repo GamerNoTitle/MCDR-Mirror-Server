@@ -3,12 +3,17 @@ import time
 import shutil
 import datetime
 import os
+import json as js
 
-system_type=1	# 0 for linux, 1 for windows
-mirror_folder='./mirror/'	# Setting up your mirror folder here
-language='zh-CN'	# zh-CN/en is avaliable
-server_type=1	# 0 for Vanilla or Forge/Fabric based on Vanilla, Others like sponge/bukkit please change it to 1
-				# or CHECKOUT YOUR WORLD FOLDER, if there's just one folder named world then set it to 0, or set it to 1
+def read_config():
+    with open("config/mirror.json") as json_file:
+        config = js.load(json_file)
+    return config
+conf=read_config()
+system_type=conf['system']
+mirror_folder=conf['folder']
+language=conf['language']
+server_type=conf['server']
 
 help_msg='''
 §r======= §6Minecraft Mirror 镜像服插件 §r=======
@@ -37,6 +42,7 @@ source_the_end='./server/world_the_end'
 target=('{}server/world'.format(mirror_folder))
 target_nether=('{}server/world_nether'.format(mirror_folder))
 target_the_end=('{}server/world_the_end'.format(mirror_folder))
+
 def on_info(server, info):
 	if info.is_player and info.content == '!!mirror':
 		if language=='zh-CN':
@@ -85,9 +91,9 @@ def on_info(server, info):
 		else:
 			server.say('Now starting the server, please wait...The time for the server\'s start depends on the server')
 		if system_type==0:
-			os.system('cd mirror && python3 ./MCDReforged.py')
+			os.system('cd {} && python3 ./MCDReforged.py'.format(mirror_folder))
 		if system_type==1:
-			os.system('cd mirror && python ./MCDReforged.py')
+			os.system('cd {} && python ./MCDReforged.py'.format(mirror_folder))
 		os.system('cd ..')
 		if language=='zh-CN':
 			server.say('镜像服已关闭！')
