@@ -1,6 +1,6 @@
 # MCDR-Mirror-Server
 
-[ENGLISH](#English Users)
+[ENGLISH](#English%20Users)
 
 这是一个能够让你在MCDR的帮助下开镜像服便于调试的插件（仅支持python3）
 
