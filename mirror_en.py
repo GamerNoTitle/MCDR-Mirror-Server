@@ -71,7 +71,7 @@ def helpmsg(server,info):
 def sync(server,info):
     start_time=datetime.datetime.now()
     server.execute('save-all')
-    server.say('Syncing...')
+    server.say('§6[Mirror]Syncing...')
     i=0
     while True:
         if(i==len(world)-1): break
@@ -82,16 +82,16 @@ def sync(server,info):
             shutil.copytree(source[i],target[i])
         i=i+1
     end_time=datetime.datetime.now()
-    server.say('Sync completed in {}'.format(end_time-start_time))
+    server.say('§6[Mirror]Sync completed in {}'.format(end_time-start_time))
 
 def start(server,info):
-    server.say('Mirror server is launching, please wait...')
+    server.say('§6[Mirror]Mirror server is launching, please wait...')
     if platform.system()=='Windows':
         os.system('cd {} && powershell {}'.format(mirror_folder,start_command))
     else:
         os.system('cd {} && {}'.format(mirror_folder,start_command))
     os.system('cd ..')
-    server.say('Mirror server has been shutdown!')
+    server.say('§6[Mirror]Mirror server has been shutdown!')
 
 def command(server,info):
     if(conf['remote']['command']):
@@ -101,7 +101,7 @@ def command(server,info):
                     remote.command('/'+info.content[14:])
                     remote.disconnect()
             except Exception as e:
-                server.tell(info.player,'Connect Failed: {}'.format(e))
+                server.tell(info.player,'§6[Mirror]§4Connection Failed: {}'.format(e))
         else:
             server.tell(info.player,'§6[Mirror]§4Error: Permission Denied!')
     else:
@@ -114,7 +114,7 @@ def stop(server,info):
             remote.disconnect()
         server.execute('say §6[Mirror]§rMiror server has been shutdown!')
     except Exception as e:
-        server.tell(info.player,'Connect Failed: {}'.format(e))
+        server.tell(info.player,'§6[Mirror]§4Connection Failed: {}'.format(e))
 
 
 def information(server,info):

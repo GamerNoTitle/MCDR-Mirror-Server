@@ -71,7 +71,7 @@ def helpmsg(server,info):
 def sync(server,info):
     start_time=datetime.datetime.now()
     server.execute('save-all')
-    server.say('正在同步到镜像服……')
+    server.say('§6[Mirror]正在同步到镜像服……')
     i=0
     while True:
         if(i==len(world)-1): break
@@ -82,16 +82,16 @@ def sync(server,info):
             shutil.copytree(source[i],target[i])
         i=i+1
     end_time=datetime.datetime.now()
-    server.say('同步完成！用时{}'.format(end_time-start_time))
+    server.say('§6[Mirror]同步完成！用时{}'.format(end_time-start_time))
 
 def start(server,info):
-    server.say('已执行镜像服开启操作！镜像服开启用时由服务器决定，一般为1~3分钟')
+    server.say('§6[Mirror]已执行镜像服开启操作！镜像服开启用时由服务器决定，一般为1~3分钟')
     if platform.system()=='Windows':
         os.system('cd {} && powershell {}'.format(mirror_folder,start_command))
     else:
         os.system('cd {} && {}'.format(mirror_folder,start_command))
     os.system('cd ..')
-    server.say('镜像服已关闭！')
+    server.say('§6[Mirror]镜像服已关闭！')
 
 def command(server,info):
     if(conf['remote']['command']):
@@ -101,7 +101,7 @@ def command(server,info):
                     remote.command('/'+info.content[14:])
                     remote.disconnect()
             except Exception as e:
-                server.tell(info.player,'连接错误：{}'.format(e))
+                server.tell(info.player,'§6[Mirror]§4连接错误：{}'.format(e))
         else:
             server.tell(info.player,'§6[Mirror]§4错误：权限不足')
     else:
@@ -114,7 +114,7 @@ def stop(server,info):
             remote.disconnect()
         server.execute('say §6[Mirror]§r镜像服已关闭')
     except Exception as e:
-        server.tell(info.player,'连接错误：{}'.format(e))
+        server.tell(info.player,'§6[Mirror]§4连接错误：{}'.format(e))
 
 
 def information(server,info):
