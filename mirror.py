@@ -95,7 +95,7 @@ def start(server,info):
 
 def command(server,info):
     if(conf['remote']['command']):
-        if(server.get_permission_level(info)>3):
+        if(server.get_permission_level(info)>2):
             try:
                 with MCRcon(address,secret,port) as remote:
                     remote.command('/'+info.content[14:])
@@ -118,7 +118,7 @@ def stop(server,info):
 
 
 def information(server,info):
-    if(server.get_permission_level(info)>3):
+    if(server.get_permission_level(info)>2):
         server.tell(info.player,remote_info)
     else:
         server.tell(info.player,"§6[Mirror]§4错误：权限不足")
