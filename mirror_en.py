@@ -44,22 +44,22 @@ remote_info='''
 '''.format(address,port)
 
 help_msg='''
-§r======= §6Minecraft Mirror 镜像服插件 §r=======
-使用§6!!mirror sync§r来同步主服务器到镜像服
-使用§6!!mirror start§r来打开镜像服
-§4请注意：如果你不开启镜像服的Rcon功能，你只能在镜像服中关闭镜像服
-§4要使用此功能，可以尝试使用
-§4无需MCDR-Admin权限的§6SimpleOP
-§4或者需要MCDR-Admin权限的§6StartStopHelper
------Rcon功能-----
-使用§6!!mirror info§r来查看rcon配置信息（管理员）
-使用§6!!mirror stop§r来关闭镜像服
-使用§6!!mirror status§r来查看镜像服务器是否开启
-使用§6!!mirror rcon <command>§r来在镜像服中执行命令（管理员，无需输入/）
+§r======= §6Minecraft Mirror Plugin §r=======
+Use §6!!mirror sync§r to sync the main server's world to the mirror one
+Use §6!!mirror start§r to turn on the mirror server
+§4BE CAUTIOUS: IF YOU DON'T ENABLE THE RCON FREATURE OF THE MIRROR SERVER, YOU CANNOT SHUTDOWN THE SERVER BY REMOTE COMMAND
+§4YOU CAN ONLY SHUTDOWN IT IN THE MIRROR SERVER, TO DO THIS, YOU CAN CHECKOUT THE FOLLOWING MCDR PLUGINS
+§4SimpleOP without MCDR-Admin permission required
+§4StartStopHelper with MCDR-Admin permission required
+-----Rcon Features-----
+Use §6!!mirror info§r to checkout rcon information(MCDR-Admin Permission is Required)
+Use §6!!mirror stop§r to stop mirror server
+Use §6!!mirror status§r to checkout whether the mirror has been turned on or not
+Use §6!!mirror rcon <command>§r to send command to mirror server(MCDR-Admin Permission is Required, use it WITHOUT SLASH)
 '''
 
-SimpleOP=' {"text":"§6查看SimpleOP","clickEvent":{"action":"open_url","value":"https://github.com/GamerNoTitle/SimpleOP"}}'
-StartStopHelper=' {"text":"§6查看StartStopHelper","clickEvent":{"action":"open_url","value":"https://github.com/MCDReforged-Plugins/StartStopHelper"}}'
+SimpleOP=' {"text":"§6Checkout SimpleOP","clickEvent":{"action":"open_url","value":"https://github.com/GamerNoTitle/SimpleOP"}}'
+StartStopHelper=' {"text":"§6Checkout StartStopHelper","clickEvent":{"action":"open_url","value":"https://github.com/MCDReforged-Plugins/StartStopHelper"}}'
 
 
 def helpmsg(server,info):
@@ -71,7 +71,7 @@ def helpmsg(server,info):
 def sync(server,info):
     start_time=datetime.datetime.now()
     server.execute('save-all')
-    server.say('正在同步到镜像服……')
+    server.say('Syncing...')
     i=0
     while True:
         if(i==len(world)-1): break
@@ -82,16 +82,16 @@ def sync(server,info):
             shutil.copytree(source[i],target[i])
         i=i+1
     end_time=datetime.datetime.now()
-    server.say('同步完成！用时{}'.format(end_time-start_time))
+    server.say('Sync completed in {}'.format(end_time-start_time))
 
 def start(server,info):
-    server.say('已执行镜像服开启操作！镜像服开启用时由服务器决定，一般为1~3分钟')
+    server.say('Mirror server is launching, please wait...')
     if platform.system()=='Windows':
         os.system('cd {} && powershell {}'.format(mirror_folder,start_command))
     else:
         os.system('cd {} && {}'.format(mirror_folder,start_command))
     os.system('cd ..')
-    server.say('镜像服已关闭！')
+    server.say('Mirror server has been shutdown!')
 
 def command(server,info):
     if(conf['remote']['command']):
@@ -101,36 +101,36 @@ def command(server,info):
                     remote.command('/'+info.content[14:])
                     remote.disconnect()
             except Exception as e:
-                server.tell(info.player,'连接错误：{}'.format(e))
+                server.tell(info.player,'Connect Failed: {}'.format(e))
         else:
-            server.tell(info.player,'§6[Mirror]§4错误：权限不足')
+            server.tell(info.player,'§6[Mirror]§4Error: Permission Denied!')
     else:
-        server.tell(info.player,' §6[Mirror]§4错误：rcon功能未开启！')
+        server.tell(info.player,' §6[Mirror]§4Error: Rcon feature is disabled!')
 
 def stop(server,info):
     try:
         with MCRcon(address,secret,port) as remote:
             remote.command('/stop')
             remote.disconnect()
-        server.execute('say §6[Mirror]§r镜像服已关闭')
+        server.execute('say §6[Mirror]§rMiror server has been shutdown!')
     except Exception as e:
-        server.tell(info.player,'连接错误：{}'.format(e))
+        server.tell(info.player,'Connect Failed: {}'.format(e))
 
 
 def information(server,info):
     if(server.get_permission_level(info)>3):
         server.tell(info.player,remote_info)
     else:
-        server.tell(info.player,"§6[Mirror]§4错误：权限不足")
+        server.tell(info.player,"§6[Mirror]§4Error: Permission Denied!")
 
 def status(server,info):
     try:
         with MCRcon(address,secret,port) as remote:
             remote.command('/list')
             remote.disconnect()
-        server.tell(info.player,'§6[Mirror]§l镜像服已开启！')
+        server.tell(info.player,'§6[Mirror]§lMirror Server is online!')
     except Exception:
-        server.tell(info.player,'§4[Mirror]§l镜像服未开启！')
+        server.tell(info.player,'§4[Mirror]§lMirror Server is offline!')
 
 
 def on_info(server,info):

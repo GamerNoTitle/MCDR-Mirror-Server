@@ -1,6 +1,12 @@
 {
-    "system": 0,
-    "folder": "./mirror/",
-    "language": "zh-CN",
-    "server": 0
+    "path": "./mirror/",
+    "world": ["world"],
+    "command": "python3 MCDReforged.py",
+    "remote":{
+        "enable": false,
+        "address": "127.0.0.1",
+        "secret": "password",
+        "port": 25575,
+        "command": false
+    }
 }
