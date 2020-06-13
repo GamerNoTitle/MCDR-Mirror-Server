@@ -74,7 +74,7 @@ def sync(server,info):
     server.say('§6[Mirror]Syncing...')
     i=0
     while True:
-        if(i==len(world)-1): break
+        if(i>len(world)-1): break
         try:
             shutil.copytree(source[i],target[i])
         except:
