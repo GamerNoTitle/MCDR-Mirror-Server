@@ -112,7 +112,6 @@ def stop(server,info):
         with MCRcon(address,secret,port) as remote:
             remote.command('/stop')
             remote.disconnect()
-        server.execute('say §6[Mirror]§r镜像服已关闭')
     except Exception as e:
         server.tell(info.player,'§6[Mirror]§4连接错误：{}'.format(e))
 
