@@ -31,6 +31,8 @@ $ pip3 install mcrcon	# Linux用家
 
 如果你想要在服务器中对镜像服进行关闭操作，那么有两种方式，第一种方式即为OP使用`/stop`来关闭服务器，第二种方式则是借助其他的MCDR插件如[SimpleOP](https://github.com/GamerNoTitle/SimpleOP)或者是[StartStopHelper](https://github.com/MCDReforged-Plugins/StartStopHelper)来进行服务器的管理！
 
+如果你发现使用`!!mirror stop`后服务器停在`Waited * seconds attempting force stop`，请你注意，这不是`mirror`插件的bug，这是MC服务器核心的BUG，详情可以看这个地方 https://bugs.mojang.com/browse/MC-154617 
+
 ### 初次使用
 
 - 打开`mirror.json`，进行配置
@@ -82,6 +84,8 @@ use`!!mirror status` to checkout whether the mirror is online or not
 use`!!mirror rcon <command>` to input command to mirror server, ***WITHOUT A SLASH AHEAD***
 
 **CAUTION: IF YOU DISABLED THE RCON IN THE MIRROR SERVER, YOU CAN ONLY TWO WAYS TO TURN OFF IT BY USING THE COMMAND `/stop` IN THE MIRROR SERVER OR USE OTHER MCDR PLUGINS LIKE [SimpleOP](https://github.com/GamerNoTitle/SimpleOP) OR [StartStopHelper](https://github.com/MCDReforged-Plugins/StartStopHelper). REMEMBER TO TURN THE MIRROR SERVER OFF BEFORE YOU SYNC THE WORLD INTO IT**
+
+If you found that you stop the server by using the command `!!mirror stop` and it hangs on `Waited * seconds attempting force stop`, I'm very sad to tell you, this is a server-core's bug, not `mirror`‘s. For more information, you can visit here https://bugs.mojang.com/browse/MC-154617 
 
 ### Getting Started
 
