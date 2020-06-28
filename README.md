@@ -39,20 +39,38 @@ $ pip3 install mcrcon	# Linux用家
 
 - ```json
   {
-      "path": "./mirror/",	//修改为你的镜像服路径，默认为mirror文件夹
-      "world": ["world"],		//设置你的世界文件夹，原版只有一个world，spigot类有world,world_nether,world_the_end，根据自己的核心设定，格式为["world","world_nether","..."]
-      "command": "python3 MCDReforged.py",	//镜像服启动命令
-      "remote":{		//rcon相关设置
-          "enable": false,	//开关
-          "address": "127.0.0.1",		//rcon地址，通常在同一台服务器设置为127.0.0.1即可
-          "secret": "password",		//rcon密码
-          "port": 25575,				//rcon端口
-          "command": false			//是否允许使用!!mirror rcon <command>来对镜像服进行指令输入
+      "path": "./mirror/",
+      "world": ["world"],	
+      "command": "python3 MCDReforged.py",
+      "remote":{
+          "enable": false,
+          "address": "127.0.0.1",
+          "secret": "password",
+          "port": 25575,
+          "command": false
       }
   }
   ```
 
 - 配置完成后保存即可，现在你就可以打开服务器了并且使用`!!mirror`命令了！
+
+`path` 修改为你的镜像服路径，默认为mirror文件夹
+
+`world` 设置你的世界文件夹，原版只有一个world，spigot类有world,world_nether,world_the_end，根据自己的核心设定，格式为["world","world_nether","..."]
+
+`command` 镜像服启动命令
+
+`remote: enable` rcon相关设置，true来打开它
+
+`remote: address` rcon地址，通常在同一台服务器设置为127.0.0.1即可
+
+`remote: secret` rcon密码
+
+`remote: port ` rcon端口
+
+`remote: command` 是否允许使用!!mirror rcon <command>来对镜像服进行指令输入
+
+- [ ] 挖个新坑：区块同步功能
 
 ---
 
@@ -95,15 +113,31 @@ If you found that you stop the server by using the command `!!mirror stop` and i
 
 - ```json
   {
-      "path": "./mirror/",	//Your mirror server path, mirror as default
-      "world": ["world"],		//Your world folder(s), the Vanilla server only has the "world" folder but others like spigot has three. Just fill it with your folder(s). The example can be like this -> ["world","world_nether","..."]
-      "command": "python3 MCDReforged.py",	//The start command for your mirror server
-      "remote":{		//rcon related settings
+      "path": "./mirror/",
+      "world": ["world"],
+      "command": "python3 MCDReforged.py",
+      "remote":{
           "enable": false,
-          "address": "127.0.0.1",		//rcon address, change it to your address
-          "secret": "password",		//rcon password
-          "port": 25575,				//rcon port
-          "command": false			//allow using !!mirror rcon <command> to input command to mirror server
+          "address": "127.0.0.1",
+          "secret": "password",
+          "port": 25575,
+          "command": false
       }
   }
   ```
+
+`path` Your mirror server path, mirror as default
+
+`world` Your world folder(s), the Vanilla server only has the "world" folder but others like spigot has three. Just fill it with your folder(s). The example can be like this -> ["world","world_nether","..."]
+
+`command` The start command for your mirror server
+
+`remote: enable` rcon related settings, true to enable it
+
+`remote: address` rcon address, change it to your address
+
+`remote: secret` rcon password
+
+`remote: port ` rcon port
+
+`remote: command` allow using !!mirror rcon <command> to input command to mirror server
