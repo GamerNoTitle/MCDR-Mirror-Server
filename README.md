@@ -71,6 +71,7 @@ $ pip3 install mcrcon	# Linux用家
 `remote: command` 是否允许使用!!mirror rcon <command>来对镜像服进行指令输入
 
 - [ ] 挖个新坑：区块同步功能
+- [ ] 再开个新坑：指定世界同步
 
 ---
 
