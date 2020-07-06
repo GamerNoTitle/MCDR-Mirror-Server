@@ -20,6 +20,8 @@ start_command=conf['command']
 world=conf["world"]
 source=[]
 target=[]
+delay=conf['delay']
+abort_sync=False
 
 MCDRJudge=os.path.exists("{}MCDReforged.py".format(mirror_folder))
 
@@ -47,6 +49,7 @@ help_msg='''
 §r======= §6Minecraft Mirror 镜像服插件 §r=======
 使用§6!!mirror sync§r来同步主服务器到镜像服
 使用§6!!mirror start§r来打开镜像服
+使用§6!!mirror abort§r来中断冷回档
 §4请注意：如果你不开启镜像服的Rcon功能，你只能在镜像服中关闭镜像服
 §4要使用此功能，可以尝试使用
 §4无需MCDR-Admin权限的§6SimpleOP
@@ -61,7 +64,6 @@ help_msg='''
 SimpleOP=' {"text":"§6查看SimpleOP","clickEvent":{"action":"open_url","value":"https://github.com/GamerNoTitle/SimpleOP"}}'
 StartStopHelper=' {"text":"§6查看StartStopHelper","clickEvent":{"action":"open_url","value":"https://github.com/MCDReforged-Plugins/StartStopHelper"}}'
 
-
 def helpmsg(server,info):
     if info.is_player and info.content == '!!mirror':
         server.tell(info.player, help_msg)
@@ -73,16 +75,49 @@ def sync(server,info):
     server.execute('save-all')
     server.say('§6[Mirror]正在同步到镜像服……')
     i=0
-    while True:
-        if(i>len(world)-1): break
+    try:
+        while True:
+            if(i>len(world)-1): break
+            shutil.copytree(source[i],target[i])
+            i=i+1
+    except:
         try:
-            shutil.copytree(source[i],target[i])
-        except:
-            shutil.rmtree(target[i],True)
-            shutil.copytree(source[i],target[i])
-        i=i+1
+            while True:
+                if(i>len(world)-1): break
+                shutil.rmtree(target[i],True)
+                shutil.copytree(source[i],target[i])
+                i=i+1
+        except Exception as e:
+            server.say('§4[Mirror]热同步失败：{}'.format(e))
+            server.say('§6[Mirror]§r{}秒后将关服进行同步'.format(delay))
+            count=delay
+            global abort_sync
+            while True:
+                time.sleep(1)
+                aborted=abort_sync
+                if(aborted):
+                    break
+                count=count-1
+                server.say('§6[Mirror]还有{}秒进行冷同步'.format(count))
+                if(count==0):
+                    break
+            time.sleep(delay)
+            if(abort_sync==False):
+                server.execute('kick @a §6[Mirror]正在进行世界同步……')
+                server.stop()
+                server.wait_for_start()
+                while True:
+                    if(i>len(world)-1): break
+                    shutil.rmtree(target[i],True)
+                    shutil.copytree(source[i],target[i])
+                    i=i+1
+                server.start()
     end_time=datetime.datetime.now()
-    server.say('§6[Mirror]同步完成！用时{}'.format(end_time-start_time))
+    if(abort_sync):
+        None
+    else:
+        server.say('§6[Mirror]同步完成！用时{}'.format(end_time-start_time))
+    abort_sync=False
 
 def start(server,info):
     server.say('§6[Mirror]已执行镜像服开启操作！镜像服开启用时由服务器决定，一般为1~3分钟')
@@ -153,3 +188,8 @@ def on_info(server,info):
 
     if(info.content=='!!mirror status'):
         status(server,info)
+
+    if(info.content=='!!mirror abort'):
+        global abort_sync
+        abort_sync=True
+        server.say('§6[Mirror]§l冷同步被§r§b{}§r§6§l中断！'.format(info.player))

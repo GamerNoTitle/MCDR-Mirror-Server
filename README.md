@@ -6,7 +6,9 @@
 
 > ### 2020/7/6
 >
-> 已知1.16以上版本会出现Session.lock文件被锁定的问题，正在尝试修复
+> 已知1.16以上版本会出现Session.lock文件被锁定的问题，目前采取了一种折中的方案，采用关服同步型的冷同步
+>
+> 后期将参考QBM使得1.16+的版本也能够使用热同步
 
 使用`!!mirror`可以呼出帮助菜单
 
@@ -85,7 +87,9 @@ This is a plugin can help you turn on another mirror server for you to debug or 
 
 > ### 2020/7/6
 >
-> I've got the problem on the plugin cannot worked well on Minecraft 1.16+ because of the file `Session.lock` have been locked by Minecraft, I'm trying to fix it
+> I've got the problem on the plugin cannot worked well on Minecraft 1.16+ because of the file `Session.lock` have been locked by Minecraft. Now I'm using a compromised solution: turn off the server to copy the world into the mirror one and then turn on the server
+>
+> I'm trying to refer the QBM plugin to make 1.16+ server can use the hot sync
 
 use `!!mirror` to call out the help menu
 
