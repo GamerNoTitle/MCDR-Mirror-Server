@@ -141,7 +141,7 @@ Change the configeration in it
           "command": false
       }
   }
-  ```
+```
 
 `path` Your mirror server path, mirror as default
 
