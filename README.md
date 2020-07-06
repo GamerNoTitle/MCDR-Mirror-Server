@@ -41,9 +41,9 @@ $ pip3 install mcrcon	# Linux用家
 
 ### 初次使用
 
-- 打开`mirror.json`，进行配置
+打开`mirror.json`，进行配置
 
-- ```json
+```json
   {
       "path": "./mirror/",
       "world": ["world"],	
@@ -123,11 +123,11 @@ If you found that you stop the server by using the command `!!mirror stop` and i
 
 ### Getting Started
 
-- Open the file `mirror.json`
+Open the file `mirror.json`
 
-- Change the configeration in it
+Change the configeration in it
 
-- ```json
+```json
   {
       "path": "./mirror/",
       "world": ["world"],
