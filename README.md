@@ -48,6 +48,7 @@ $ pip3 install mcrcon	# Linux用家
       "path": "./mirror/",
       "world": ["world"],	
       "command": "python3 MCDReforged.py",
+      "delay": 10,
       "remote":{
           "enable": false,
           "address": "127.0.0.1",
@@ -56,8 +57,8 @@ $ pip3 install mcrcon	# Linux用家
           "command": false
       }
   }
-  ```
-
+```
+  
 - 配置完成后保存即可，现在你就可以打开服务器了并且使用`!!mirror`命令了！
 
 `path` 修改为你的镜像服路径，默认为mirror文件夹
@@ -65,6 +66,8 @@ $ pip3 install mcrcon	# Linux用家
 `world` 设置你的世界文件夹，原版只有一个world，spigot类有world,world_nether,world_the_end，根据自己的核心设定，格式为["world","world_nether","..."]
 
 `command` 镜像服启动命令
+
+`delay` 冷回档等待时长
 
 `remote: enable` rcon相关设置，true来打开它
 
@@ -129,6 +132,7 @@ If you found that you stop the server by using the command `!!mirror stop` and i
       "path": "./mirror/",
       "world": ["world"],
       "command": "python3 MCDReforged.py",
+      "delay": 10,
       "remote":{
           "enable": false,
           "address": "127.0.0.1",
@@ -144,6 +148,8 @@ If you found that you stop the server by using the command `!!mirror stop` and i
 `world` Your world folder(s), the Vanilla server only has the "world" folder but others like spigot has three. Just fill it with your folder(s). The example can be like this -> ["world","world_nether","..."]
 
 `command` The start command for your mirror server
+
+`delay` what time will the cold sync wait before turn off the server
 
 `remote: enable` rcon related settings, true to enable it
 
