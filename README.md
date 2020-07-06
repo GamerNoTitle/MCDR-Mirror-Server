@@ -4,6 +4,10 @@
 
 这是一个能够让你在MCDR的帮助下开镜像服便于调试的插件（仅支持python3）
 
+> ### 2020/7/6
+>
+> 已知1.16以上版本会出现Session.lock文件被锁定的问题，正在尝试修复
+
 使用`!!mirror`可以呼出帮助菜单
 
 使用`!!mirror sync`来进行主世界同步到镜像服
@@ -78,6 +82,10 @@ $ pip3 install mcrcon	# Linux用家
 # English
 
 This is a plugin can help you turn on another mirror server for you to debug or design (**Python3 ONLY**)
+
+> ### 2020/7/6
+>
+> I've got the problem on the plugin cannot worked well on Minecraft 1.16+ because of the file `Session.lock` have been locked by Minecraft, I'm trying to fix it
 
 use `!!mirror` to call out the help menu
 
