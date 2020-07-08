@@ -2,13 +2,7 @@
 
 [ENGLISH](#English)
 
-这是一个能够让你在MCDR的帮助下开镜像服便于调试的插件（仅支持python3）
-
-> ### 2020/7/6
->
-> 已知1.16以上版本会出现Session.lock文件被锁定的问题，目前采取了一种折中的方案，采用关服同步型的冷同步
->
-> 后期将参考QBM使得1.16+的版本也能够使用热同步
+这是一个能够让你在MCDR的帮助下开镜像服便于调试的插件（仅支持python3），现已支持1.16+
 
 使用`!!mirror`可以呼出帮助菜单
 
@@ -48,7 +42,6 @@ $ pip3 install mcrcon	# Linux用家
       "path": "./mirror/",
       "world": ["world"],	
       "command": "python3 MCDReforged.py",
-      "delay": 10,
       "remote":{
           "enable": false,
           "address": "127.0.0.1",
@@ -86,13 +79,7 @@ $ pip3 install mcrcon	# Linux用家
 
 # English
 
-This is a plugin can help you turn on another mirror server for you to debug or design (**Python3 ONLY**)
-
-> ### 2020/7/6
->
-> I've got the problem on the plugin cannot worked well on Minecraft 1.16+ because of the file `Session.lock` have been locked by Minecraft. Now I'm using a compromised solution: turn off the server to copy the world into the mirror one and then turn on the server
->
-> I'm trying to refer the QBM plugin to make 1.16+ server can use the hot sync
+This is a plugin can help you turn on another mirror server for you to debug or design (**Python3 ONLY**), now supported Minecraft 1.16+
 
 use `!!mirror` to call out the help menu
 
@@ -132,7 +119,6 @@ Change the configeration in it
       "path": "./mirror/",
       "world": ["world"],
       "command": "python3 MCDReforged.py",
-      "delay": 10,
       "remote":{
           "enable": false,
           "address": "127.0.0.1",

@@ -20,8 +20,6 @@ start_command=conf['command']
 world=conf["world"]
 source=[]
 target=[]
-delay=conf['delay']
-abort_sync=False
 mirror_started=False
 
 MCDRJudge=os.path.exists("{}MCDReforged.py".format(mirror_folder))
@@ -50,7 +48,6 @@ help_msg='''
 §r======= §6Minecraft Mirror Plugin §r=======
 Use §6!!mirror sync§r to sync the main server's world to the mirror one
 Use §6!!mirror start§r to turn on the mirror server
-Use §6!!mirror abort§r to stop the cold sync process
 §4BE CAUTIOUS: IF YOU DON'T ENABLE THE RCON FREATURE OF THE MIRROR SERVER, YOU CANNOT SHUTDOWN THE SERVER BY REMOTE COMMAND
 §4YOU CAN ONLY SHUTDOWN IT IN THE MIRROR SERVER, TO DO THIS, YOU CAN CHECKOUT THE FOLLOWING MCDR PLUGINS
 §4SimpleOP without MCDR-Admin permission required
@@ -64,7 +61,6 @@ Use §6!!mirror rcon <command>§r to send command to mirror server(MCDR-Admin Pe
 
 SimpleOP=' {"text":"§6Checkout SimpleOP","clickEvent":{"action":"open_url","value":"https://github.com/GamerNoTitle/SimpleOP"}}'
 StartStopHelper=' {"text":"§6Checkout StartStopHelper","clickEvent":{"action":"open_url","value":"https://github.com/MCDReforged-Plugins/StartStopHelper"}}'
-
 
 def helpmsg(server,info):
     if info.is_player and info.content == '!!mirror':
@@ -89,37 +85,16 @@ def sync(server,info):
                 shutil.rmtree(target[i],True)
                 shutil.copytree(source[i],target[i])
                 i=i+1
-        except Exception as e:
-            server.say('§4[Mirror]Hot Sync Failed：{}'.format(e))
-            server.say('§6[Mirror]§rServer will be turned off for the puepose to sync in {} Seconds'.format(delay))
-            count=delay
-            global abort_sync
+        except Exception:
             while True:
-                time.sleep(1)
-                aborted=abort_sync
-                if(aborted):
-                    break
-                count=count-1
-                server.say('§6[Mirror]{} second(s) left'.format(count))
-                if(count==0):
-                    break
-            time.sleep(delay)
-            if(abort_sync==False):
-                server.execute('kick @a §6[Mirror]Syncing the world...')
-                server.stop()
-                server.wait_for_start()
-                while True:
-                    if(i>len(world)-1): break
-                    shutil.rmtree(target[i],True)
-                    shutil.copytree(source[i],target[i])
-                    i=i+1
-                server.start()
+                if(i>len(world)-1): break
+                shutil.rmtree(target[i],True)
+                ignore=shutil.ignore_patterns('session.lock')
+                shutil.copytree(source[i],target[i],ignore=ignore)
+                i=i+1
+
     end_time=datetime.datetime.now()
-    if(abort_sync):
-        None
-    else:
-        server.say('§6[Mirror]Sync completed in {}'.format(end_time-start_time))
-    abort_sync=False
+    server.say('§6[Mirror]Sync completed in {}'.format(end_time-start_time))
 
 def start(server,info):
     server.say('§6[Mirror]Mirror server is launching, please wait...')
@@ -198,7 +173,3 @@ def on_info(server,info):
     if(info.content=='!!mirror status'):
         status(server,info)
     
-    if(info.content=='!!mirror abort'):
-        global abort_sync
-        abort_sync=True
-        server.say('§6[Mirror]§lCold sync has been aborted by§r§b{}'.format(info.player))

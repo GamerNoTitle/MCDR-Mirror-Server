@@ -21,7 +21,6 @@ world=conf["world"]
 source=[]
 target=[]
 delay=conf['delay']
-abort_sync=False
 mirror_started=False
 
 MCDRJudge=os.path.exists("{}MCDReforged.py".format(mirror_folder))
@@ -88,37 +87,19 @@ def sync(server,info):
                 shutil.rmtree(target[i],True)
                 shutil.copytree(source[i],target[i])
                 i=i+1
-        except Exception as e:
-            server.say('§4[Mirror]热同步失败：{}'.format(e))
-            server.say('§6[Mirror]§r{}秒后将关服进行同步'.format(delay))
-            count=delay
-            global abort_sync
+        except Exception:
             while True:
-                time.sleep(1)
-                aborted=abort_sync
-                if(aborted):
-                    break
-                count=count-1
-                server.say('§6[Mirror]还有{}秒进行冷同步'.format(count))
-                if(count==0):
-                    break
-            time.sleep(delay)
-            if(abort_sync==False):
-                server.execute('kick @a §6[Mirror]正在进行世界同步……')
-                server.stop()
-                server.wait_for_start()
-                while True:
-                    if(i>len(world)-1): break
-                    shutil.rmtree(target[i],True)
-                    shutil.copytree(source[i],target[i])
-                    i=i+1
-                server.start()
+                if(i>len(world)-1): break
+                shutil.rmtree(target[i],True)
+                ignore=shutil.ignore_patterns('session.lock')
+                shutil.copytree(source[i],target[i],ignore=ignore)
+                i=i+1
+
     end_time=datetime.datetime.now()
-    if(abort_sync):
-        None
-    else:
-        server.say('§6[Mirror]同步完成！用时{}'.format(end_time-start_time))
-    abort_sync=False
+    # if(abort_sync):
+    #     None
+    # else:
+    server.say('§6[Mirror]同步完成！用时{}'.format(end_time-start_time))
 
 def start(server,info):
     server.say('§6[Mirror]已执行镜像服开启操作！镜像服开启用时由服务器决定，一般为1~3分钟')
@@ -197,8 +178,3 @@ def on_info(server,info):
 
     if(info.content=='!!mirror status'):
         status(server,info)
-
-    if(info.content=='!!mirror abort'):
-        global abort_sync
-        abort_sync=True
-        server.say('§6[Mirror]§l冷同步被§r§b{}§r§6§l中断！'.format(info.player))
