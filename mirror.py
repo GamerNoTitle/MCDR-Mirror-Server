@@ -22,6 +22,7 @@ source=[]
 target=[]
 delay=conf['delay']
 abort_sync=False
+mirror_started=False
 
 MCDRJudge=os.path.exists("{}MCDReforged.py".format(mirror_folder))
 
@@ -126,6 +127,8 @@ def start(server,info):
     else:
         os.system('cd {} && {}'.format(mirror_folder,start_command))
     os.system('cd ..')
+    global mirror_started
+    mirror_started=False
     server.say('§6[Mirror]镜像服已关闭！')
 
 def command(server,info):
@@ -158,13 +161,17 @@ def information(server,info):
         server.tell(info.player,"§6[Mirror]§4错误：权限不足")
 
 def status(server,info):
+    global mirror_started
     try:
         with MCRcon(address,secret,port) as remote:
             remote.command('/list')
             remote.disconnect()
         server.tell(info.player,'§6[Mirror]§l镜像服已开启！')
     except Exception:
-        server.tell(info.player,'§4[Mirror]§l镜像服未开启！')
+        if mirror_started:
+            server.tell(info.player,'§6[Mirror]§l镜像服正在启动中……')
+        else:
+            server.tell(info.player,'§4[Mirror]§l镜像服未开启！')
 
 
 def on_info(server,info):
@@ -175,6 +182,8 @@ def on_info(server,info):
         sync(server,info)
     
     if info.content == '!!mirror start':
+        global mirror_started
+        mirror_started=True
         start(server,info)
 
     if('!!mirror rcon' in info.content):

@@ -22,7 +22,7 @@ source=[]
 target=[]
 delay=conf['delay']
 abort_sync=False
-
+mirror_started=False
 
 MCDRJudge=os.path.exists("{}MCDReforged.py".format(mirror_folder))
 
@@ -128,6 +128,8 @@ def start(server,info):
     else:
         os.system('cd {} && {}'.format(mirror_folder,start_command))
     os.system('cd ..')
+    global mirror_started
+    mirror_started=False
     server.say('§6[Mirror]Mirror server has been shutdown!')
 
 def command(server,info):
@@ -166,7 +168,10 @@ def status(server,info):
             remote.disconnect()
         server.tell(info.player,'§6[Mirror]§lMirror Server is online!')
     except Exception:
-        server.tell(info.player,'§4[Mirror]§lMirror Server is offline!')
+        if mirror_started:
+            server.tell(info.player,'§6[Mirror]§lMirror Server is Starting...')
+        else:
+            server.tell(info.player,'§4[Mirror]§lMirror Server is offline!')
 
 
 def on_info(server,info):
@@ -177,6 +182,8 @@ def on_info(server,info):
         sync(server,info)
     
     if info.content == '!!mirror start':
+        global mirror_started
+        mirror_started=True
         start(server,info)
 
     if('!!mirror rcon' in info.content):
