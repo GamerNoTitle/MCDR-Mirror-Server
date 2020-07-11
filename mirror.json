@@ -2,6 +2,7 @@
     "path": "./mirror/",
     "world": ["world"],
     "command": "python3 MCDReforged.py",
+    "delay": 10,
     "remote":{
         "enable": false,
         "address": "127.0.0.1",
