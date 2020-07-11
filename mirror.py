@@ -20,7 +20,6 @@ start_command=conf['command']
 world=conf["world"]
 source=[]
 target=[]
-delay=conf['delay']
 mirror_started=False
 
 MCDRJudge=os.path.exists("{}MCDReforged.py".format(mirror_folder))
