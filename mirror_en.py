@@ -157,8 +157,11 @@ def on_info(server,info):
     
     if info.content == '!!mirror start':
         global mirror_started
-        mirror_started=True
-        start(server,info)
+        if mirror_started:
+            server.tell(info.player,'§b[Mirror]Mirror server has already started, please don\'t run the command again!')
+        else:
+            mirror_started=True
+            start(server,info)
 
     if('!!mirror rcon' in info.content):
         command(server,info)
