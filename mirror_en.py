@@ -143,7 +143,7 @@ def status(server,info):
         server.tell(info.player,'§6[Mirror]§lMirror Server is online!')
     except Exception:
         if mirror_started:
-            server.tell(info.player,'§6[Mirror]§lMirror Server is Starting...')
+            server.tell(info.player,'§6[Mirror]§lMirror Server is Starting...(or mirror has been started but rcon feature didn\'t work well')
         else:
             server.tell(info.player,'§4[Mirror]§lMirror Server is offline!')
 

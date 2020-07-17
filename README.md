@@ -60,8 +60,6 @@ $ pip3 install mcrcon	# Linux用家
 
 `command` 镜像服启动命令
 
-`delay` 冷回档等待时长
-
 `remote: enable` rcon相关设置，true来打开它
 
 `remote: address` rcon地址，通常在同一台服务器设置为127.0.0.1即可
@@ -70,7 +68,7 @@ $ pip3 install mcrcon	# Linux用家
 
 `remote: port ` rcon端口
 
-`remote: command` 是否允许使用!!mirror rcon <command>来对镜像服进行指令输入
+`remote: command` 是否允许使用!!mirror rcon \<command>来对镜像服进行指令输入
 
 - [ ] 挖个新坑：区块同步功能
 - [ ] 再开个新坑：指定世界同步
@@ -134,8 +132,6 @@ Change the configeration in it
 `world` Your world folder(s), the Vanilla server only has the "world" folder but others like spigot has three. Just fill it with your folder(s). The example can be like this -> ["world","world_nether","..."]
 
 `command` The start command for your mirror server
-
-`delay` what time will the cold sync wait before turn off the server
 
 `remote: enable` rcon related settings, true to enable it
 

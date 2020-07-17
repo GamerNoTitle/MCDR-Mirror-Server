@@ -47,7 +47,6 @@ help_msg='''
 §r======= §6Minecraft Mirror 镜像服插件 §r=======
 使用§6!!mirror sync§r来同步主服务器到镜像服
 使用§6!!mirror start§r来打开镜像服
-使用§6!!mirror abort§r来中断冷回档
 §4请注意：如果你不开启镜像服的Rcon功能，你只能在镜像服中关闭镜像服
 §4要使用此功能，可以尝试使用
 §4无需MCDR-Admin权限的§6SimpleOP
@@ -145,7 +144,7 @@ def status(server,info):
         server.tell(info.player,'§6[Mirror]§l镜像服已开启！')
     except Exception:
         if mirror_started:
-            server.tell(info.player,'§6[Mirror]§l镜像服正在启动中……')
+            server.tell(info.player,'§6[Mirror]§l镜像服正在启动中……（或已经启动但是rcon并没有正常工作）')
         else:
             server.tell(info.player,'§4[Mirror]§l镜像服未开启！')
 
