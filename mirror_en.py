@@ -4,6 +4,8 @@ import datetime
 import os
 import json as js
 import platform
+from os.path import abspath, dirname
+current_path = abspath(dirname(__file__))
 def read_config():
     with open("config/mirror.json") as json_file:
         config = js.load(json_file)
@@ -101,7 +103,7 @@ def start(server,info):
         os.system('cd {} && powershell {}'.format(mirror_folder,start_command))
     else:
         os.system('cd {} && {}'.format(mirror_folder,start_command))
-    os.system('cd ..')
+    os.system('cd {}'.format(current_path))
     global mirror_started
     mirror_started=False
     server.say('§6[Mirror]Mirror server has been shutdown!')
