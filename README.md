@@ -2,7 +2,7 @@
 
 [ENGLISH](#English)
 
-这是一个能够让你在MCDR的帮助下开镜像服便于调试的插件（仅支持python3），现已支持1.16+
+这是一个能够让你在MCDR的帮助下开镜像服便于调试的插件（仅支持python3），现已支持1.16+。如果你不懂怎么使用，可以看[这里的例子](https://bili33.top/2020/07/18/MCDR-Mirror-Server-Usage/)
 
 使用`!!mirror`可以呼出帮助菜单
 
@@ -78,6 +78,8 @@ $ pip3 install mcrcon	# Linux用家
 # English
 
 This is a plugin can help you turn on another mirror server for you to debug or design (**Python3 ONLY**), now supported Minecraft 1.16+
+
+If you don't know how to use it, you can go [here and check the example](https://bili33.top/2020/07/18/MCDR-Mirror-Server-Usage/#English)
 
 use `!!mirror` to call out the help menu
 
