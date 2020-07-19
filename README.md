@@ -73,6 +73,8 @@ $ pip3 install mcrcon	# Linux用家
 - [ ] 挖个新坑：区块同步功能
 - [ ] 再开个新坑：指定世界同步
 
+赞助：[爱发电](https://afdian.net/@GamerNoTitle)
+
 ---
 
 # English
@@ -144,3 +146,5 @@ Change the configeration in it
 `remote: port ` rcon port
 
 `remote: command` allow using !!mirror rcon <command> to input command to mirror server
+
+Donate：[aifadian](https://afdian.net/@GamerNoTitle) | [Paypal](https://paypal.me/GamerNoTitle)
