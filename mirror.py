@@ -150,6 +150,8 @@ def status(server,info):
         else:
             server.tell(info.player,'§4[Mirror]§l镜像服未开启！')
 
+def on_load(server, old_module):
+    server.add_help_message('!!mirror', '§6获取镜像服插件的使用方法')
 
 def on_info(server,info):
     if info.is_player and info.content == '!!mirror':
