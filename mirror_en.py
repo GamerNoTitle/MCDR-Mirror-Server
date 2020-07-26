@@ -5,6 +5,7 @@ import os
 import json as js
 import platform
 from os.path import abspath, dirname
+from utils import rcon
 current_path = abspath(dirname(__file__))
 def read_config():
     with open("config/mirror.json") as json_file:
@@ -36,7 +37,7 @@ else:
         target.append('{}/{}'.format(mirror_folder,world[i-1]))
 
 if(remote_enable):
-    from mcrcon import MCRcon
+    connection=rcon.Rcon(address,port,secret)
 
 
 remote_info='''
@@ -112,11 +113,12 @@ def command(server,info):
     if(conf['remote']['command']):
         if(server.get_permission_level(info)>2):
             try:
-                with MCRcon(address,secret,port) as remote:
-                    remote.command('/'+info.content[14:])
-                    remote.disconnect()
+                connection.connect()
+                connection.send_command(info.content[14:])
+                connection.disconnect()
+                server.tell(info.player,'§6[Mirror]Command Sent!')
             except Exception as e:
-                server.tell(info.player,'§6[Mirror]§4Connection Failed: {}'.format(e))
+                server.tell(info.player,'§6[Mirror]§4Error: {}'.format(e))
         else:
             server.tell(info.player,'§6[Mirror]§4Error: Permission Denied!')
     else:
@@ -124,9 +126,9 @@ def command(server,info):
 
 def stop(server,info):
     try:
-        with MCRcon(address,secret,port) as remote:
-            remote.command('/stop')
-            remote.disconnect()
+        connection.connect()
+        connection.send_command('stop')
+        connection.disconnect()
     except Exception as e:
         server.tell(info.player,'§6[Mirror]§4Connection Failed: {}'.format(e))
 
@@ -138,12 +140,12 @@ def information(server,info):
         server.tell(info.player,"§6[Mirror]§4Error: Permission Denied!")
 
 def status(server,info):
+    global mirror_started
     try:
-        with MCRcon(address,secret,port) as remote:
-            remote.command('/list')
-            remote.disconnect()
+        connection.connect()
         server.tell(info.player,'§6[Mirror]§lMirror Server is online!')
-    except Exception:
+        connection.disconnect()
+    except:
         if mirror_started:
             server.tell(info.player,'§6[Mirror]§lMirror Server is Starting...(or mirror has been started but rcon feature didn\'t work well')
         else:
@@ -151,7 +153,6 @@ def status(server,info):
 
 def on_load(server, old_module):
     server.add_help_message('!!mirror', '§6Get the usage of Mirror')
-
 
 def on_info(server,info):
     if info.is_player and info.content == '!!mirror':

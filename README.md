@@ -12,13 +12,6 @@
 
 =====Rcon功能=====
 
-**如果你要使用Rcon功能，那么你需要安装一个名为mcrcon的Python依赖库！使用以下命令来安装它**
-
-```bash
-$ pip install mcrcon	# Windows用家
-$ pip3 install mcrcon	# Linux用家
-```
-
 使用`!!mirror info`来查看Rcon配置信息（需要管理员权限）
 
 使用`!!mirror stop`来关闭镜像服（需要rcon功能）
@@ -90,13 +83,6 @@ use `!!mirror sync` to sync your main world to the mirror server
 use `!!mirror start` to open the mirror server
 
 =====Rcon features=====
-
-**When you're using the rcon features, a module called "mcrcon" is required! Use the follow command to install it!**
-
-```bash
-$ pip install mcrcon	# Windows Users
-$ pip3 install mcrcon	# Linux Users
-```
 
 use`!!mirror info` to checkout rcon information(MCDR-Admin permission is required)
 
