@@ -66,7 +66,7 @@ StartStopHelper=' {"text":"§6Checkout StartStopHelper","clickEvent":{"action":"
 
 def helpmsg(server,info):
     if info.is_player and info.content == '!!mirror':
-        server.tell(info.player, help_msg)
+        server.reply(info, help_msg, encoding=None)
         server.execute('tellraw '+ info.player + SimpleOP)
         server.execute('tellraw '+ info.player + StartStopHelper)
 
@@ -116,13 +116,13 @@ def command(server,info):
                 connection.connect()
                 connection.send_command(info.content[14:])
                 connection.disconnect()
-                server.tell(info.player,'§6[Mirror]Command Sent!')
+                server.reply(info,'§6[Mirror]Command Sent!', encoding=None)
             except Exception as e:
-                server.tell(info.player,'§6[Mirror]§4Error: {}'.format(e))
+                server.reply(info,'§6[Mirror]§4Error: {}'.format(e), encoding=None)
         else:
-            server.tell(info.player,'§6[Mirror]§4Error: Permission Denied!')
+            server.reply(info,'§6[Mirror]§4Error: Permission Denied!', encoding=None)
     else:
-        server.tell(info.player,' §6[Mirror]§4Error: Rcon feature is disabled!')
+        server.reply(info,' §6[Mirror]§4Error: Rcon feature is disabled!', encoding=None)
 
 def stop(server,info):
     try:
@@ -130,29 +130,29 @@ def stop(server,info):
         connection.send_command('stop')
         connection.disconnect()
     except Exception as e:
-        server.tell(info.player,'§6[Mirror]§4Connection Failed: {}'.format(e))
+        server.reply(info,'§6[Mirror]§4Connection Failed: {}'.format(e), encoding=None)
 
 
 def information(server,info):
     if(server.get_permission_level(info)>2):
-        server.tell(info.player,remote_info)
+        server.reply(info,remote_info)
     else:
-        server.tell(info.player,"§6[Mirror]§4Error: Permission Denied!")
+        server.reply(info,"§6[Mirror]§4Error: Permission Denied!", encoding=None)
 
 def status(server,info):
     global mirror_started
     try:
         connection.connect()
-        server.tell(info.player,'§6[Mirror]§lMirror Server is online!')
+        server.reply(info,'§6[Mirror]§lMirror Server is online!', encoding=None)
         connection.disconnect()
     except:
         if mirror_started:
-            server.tell(info.player,'§6[Mirror]§lMirror Server is Starting...(or mirror has been started but rcon feature didn\'t work well')
+            server.reply(info,'§6[Mirror]§lMirror Server is Starting...(or mirror has been started but rcon feature didn\'t work well', encoding=None)
         else:
-            server.tell(info.player,'§4[Mirror]§lMirror Server is offline!')
+            server.reply(info,'§4[Mirror]§lMirror Server is offline!', encoding=None)
 
 def on_load(server, old_module):
-    server.add_help_message('!!mirror', '§6Get the usage of Mirror')
+    server.add_help_message('!!mirror', '§6Get the usage of Mirror', encoding=None)
 
 def on_info(server,info):
     if info.is_player and info.content == '!!mirror':
@@ -164,7 +164,7 @@ def on_info(server,info):
     if info.content == '!!mirror start':
         global mirror_started
         if mirror_started:
-            server.tell(info.player,'§b[Mirror]Mirror server has already started, please don\'t run the command again!')
+            server.reply(info,'§b[Mirror]Mirror server has already started, please don\'t run the command again!', encoding=None)
         else:
             mirror_started=True
             start(server,info)

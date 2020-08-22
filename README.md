@@ -63,9 +63,6 @@
 
 `remote: command` 是否允许使用!!mirror rcon \<command>来对镜像服进行指令输入
 
-- [ ] 挖个新坑：区块同步功能
-- [ ] 再开个新坑：指定世界同步
-
 赞助：[爱发电](https://afdian.net/@GamerNoTitle)
 
 ---

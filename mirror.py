@@ -66,7 +66,7 @@ StartStopHelper=' {"text":"§6查看StartStopHelper","clickEvent":{"action":"ope
 
 def helpmsg(server,info):
     if info.is_player and info.content == '!!mirror':
-        server.tell(info.player, help_msg)
+        server.reply(info, help_msg, encoding=None)
         server.execute('tellraw '+ info.player + SimpleOP)
         server.execute('tellraw '+ info.player + StartStopHelper)
 
@@ -116,13 +116,13 @@ def command(server,info):
                 connection.connect()
                 connection.send_command(info.content[14:])
                 connection.disconnect()
-                server.tell(info.player,'§6[Mirror]指令已成功执行！')
+                server.reply(info,'§6[Mirror]指令已成功执行！',encoding=None)
             except Exception as e:
-                server.tell(info.player,'§6[Mirror]§4错误：{}'.format(e))
+                server.reply(info,'§6[Mirror]§4错误：{}'.format(e),encoding=None)
         else:
-            server.tell(info.player,'§6[Mirror]§4错误：权限不足')
+            server.reply(info,'§6[Mirror]§4错误：权限不足',encoding=None)
     else:
-        server.tell(info.player,' §6[Mirror]§4错误：rcon功能未开启！')
+        server.reply(info,' §6[Mirror]§4错误：rcon功能未开启！',encoding=None)
 
 def stop(server,info):
     try:
@@ -130,29 +130,29 @@ def stop(server,info):
         connection.send_command('stop')
         connection.disconnect()
     except Exception as e:
-        server.tell(info.player,'§6[Mirror]§4错误：{}'.format(e))
+        server.reply(info,'§6[Mirror]§4错误：{}'.format(e),encoding=None)
 
 
 def information(server,info):
     if(server.get_permission_level(info)>2):
-        server.tell(info.player,remote_info)
+        server.reply(info,remote_info)
     else:
-        server.tell(info.player,"§6[Mirror]§4错误：权限不足")
+        server.reply(info,"§6[Mirror]§4错误：权限不足",encoding=None)
 
 def status(server,info):
     global mirror_started
     try:
         connection.connect()
-        server.tell(info.player,'§6[Mirror]§l镜像服已开启！')
+        server.reply(info,'§6[Mirror]§l镜像服已开启！',encoding=None)
         connection.disconnect()
     except:
         if mirror_started:
-            server.tell(info.player,'§6[Mirror]§l镜像服正在启动中……（或已经启动但是rcon并没有正常工作）')
+            server.reply(info,'§6[Mirror]§l镜像服正在启动中……（或已经启动但是rcon并没有正常工作）',encoding=None)
         else:
-            server.tell(info.player,'§4[Mirror]§l镜像服未开启！')
+            server.reply(info,'§4[Mirror]§l镜像服未开启！',encoding=None)
 
 def on_load(server, old_module):
-    server.add_help_message('!!mirror', '§6获取镜像服插件的使用方法')
+    server.add_help_message('!!mirror', '§6获取镜像服插件的使用方法',encoding=None)
 
 def on_info(server,info):
     if info.is_player and info.content == '!!mirror':
@@ -164,7 +164,7 @@ def on_info(server,info):
     if info.content == '!!mirror start':
         global mirror_started
         if(mirror_started):
-            server.tell(info.player,'§b[Mirror]镜像服已经开启，请不要重复执行指令！')
+            server.reply(info,'§b[Mirror]镜像服已经开启，请不要重复执行指令！',encoding=None)
         else:
             mirror_started=True
             start(server,info)
