@@ -152,7 +152,7 @@ def status(server,info):
             server.reply(info,'§4[Mirror]§lMirror Server is offline!', encoding=None)
 
 def on_load(server, old_module):
-    server.add_help_message('!!mirror', '§6Get the usage of Mirror', encoding=None)
+    server.add_help_message('!!mirror', '§6Get the usage of Mirror')
 
 def on_info(server,info):
     if info.is_player and info.content == '!!mirror':
