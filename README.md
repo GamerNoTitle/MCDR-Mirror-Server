@@ -51,7 +51,7 @@
 
 `world` 设置你的世界文件夹，原版只有一个world，spigot类有world,world_nether,world_the_end，根据自己的核心设定，格式为["world","world_nether","..."]
 
-`command` 镜像服启动命令
+`command` 镜像服启动命令，[Windows用户请点我看注意事项](#启动命令Windows用户)
 
 `remote: enable` rcon相关设置，true来打开它
 
@@ -64,6 +64,18 @@
 `remote: command` 是否允许使用!!mirror rcon \<command>来对镜像服进行指令输入
 
 赞助：[爱发电](https://afdian.net/@GamerNoTitle)
+
+### 启动命令：Windows用户
+
+在Windows中，推荐直接写好一个bat文件，然后用绝对路径调用bat文件
+
+例如，我的bat文件如下
+
+```batch
+java -Xmx4G -jar server.jar
+```
+
+命名为`mirrorstart.bat`，文件放在`D:\MinecraftServer`，那我只需要把启动命令改成`D:\MincraftServer\mirrorstart.bat`即可，这么操作是为了能够直接打开一个新的命令窗口，避免关闭镜像服的时候把主服务器也关掉了
 
 ---
 
@@ -118,7 +130,7 @@ Change the configeration in it
 
 `world` Your world folder(s), the Vanilla server only has the "world" folder but others like spigot has three. Just fill it with your folder(s). The example can be like this -> ["world","world_nether","..."]
 
-`command` The start command for your mirror server
+`command` The start command for your mirror server [(Windows Users should click me and read for more information)](#Windows Users Start Command)
 
 `remote: enable` rcon related settings, true to enable it
 
@@ -131,3 +143,17 @@ Change the configeration in it
 `remote: command` allow using !!mirror rcon <command> to input command to mirror server
 
 Donate：[aifadian](https://afdian.net/@GamerNoTitle) | [Paypal](https://paypal.me/GamerNoTitle)
+
+### Windows Users: Start command
+
+In Windows environment, I recommand that you write a batch file and put it in where you will use to open your mirror server, and use the absolute path to open the file
+
+for example, i have a batch file like this
+
+```batch
+java -Xmx4G -jar server.jar
+```
+
+the file named `mirrorstart.bat` and placed in the path `D:\MinecraftServer` , then the start command shoule be `D:\MincraftServer\mirrorstart.bat`
+
+In order to open a new shell window to avoid the main server being killed when you close your mirror server by rcon, i really recommand you do so!

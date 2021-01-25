@@ -6,6 +6,7 @@ import json as js
 import platform
 from os.path import abspath, dirname
 from utils import rcon
+import subprocess as s
 current_path = abspath(dirname(__file__))
 def read_config():
     with open("config/mirror.json") as json_file:
@@ -101,7 +102,8 @@ def sync(server,info):
 def start(server,info):
     server.say('§6[Mirror]已执行镜像服开启操作！镜像服开启用时由服务器决定，一般为1~3分钟')
     if platform.system()=='Windows':
-        os.system('cd {} && powershell {}'.format(mirror_folder,start_command))
+        # os.system('cd {} && powershell {}'.format(mirror_folder,start_command))
+        s.call('{}'.format(start_command))
     else:
         os.system('cd {} && {}'.format(mirror_folder,start_command))
     os.system('cd {}'.format(current_path))
