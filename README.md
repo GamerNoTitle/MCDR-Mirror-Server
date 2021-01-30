@@ -1,5 +1,11 @@
 # MCDR-Mirror-Server
 
+## WARNING/警告
+
+本分支只适配到MCDR1.0以下（不包括1.0）版本，MCDR1.0+请使用Master分支版本
+
+This branch only for MCDR 1.0 below (1.0 not included), MCDR1.0+ please use the master branch!
+
 [ENGLISH](#English)
 
 这是一个能够让你在MCDR的帮助下开镜像服便于调试的插件（仅支持python3），现已支持1.16+。如果你不懂怎么使用，可以看[这里的例子](https://bili33.top/2020/07/18/MCDR-Mirror-Server-Usage/)
