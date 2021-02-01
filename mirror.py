@@ -5,8 +5,21 @@ import os
 import json as js
 import platform
 from os.path import abspath, dirname
-from mcdreforged.utils import rcon
+from mcdreforged.api.rcon import rcon
 import subprocess as s
+from mcdreforged.api.decorator import new_thread
+
+PLUGIN_METADATA = {
+    'id': 'mirror',
+    'version': '1.0.0',
+    'name': 'Mirror Server',  # RText component is allowed
+    'description': '镜像服插件，为你的红石机器调试/建筑设计更上一层楼！',  # RText component is allowed
+    'author': 'GamerNoTitle',
+    'link': 'https://github.com/GamerNoTitle/MCDR-Mirror-Server',
+    'dependencies': {
+    }
+}
+
 current_path = abspath(dirname(__file__))
 def read_config():
     with open("config/mirror.json") as json_file:
@@ -71,6 +84,7 @@ def helpmsg(server,info):
         server.execute('tellraw '+ info.player + SimpleOP)
         server.execute('tellraw '+ info.player + StartStopHelper)
 
+@new_thread("Mirror-Sync")
 def sync(server,info):
     start_time=datetime.datetime.now()
     server.execute('save-all')
@@ -99,6 +113,7 @@ def sync(server,info):
     end_time=datetime.datetime.now()
     server.say('§6[Mirror]同步完成！用时{}'.format(end_time-start_time))
 
+@new_thread("Mirror")
 def start(server,info):
     server.say('§6[Mirror]已执行镜像服开启操作！镜像服开启用时由服务器决定，一般为1~3分钟')
     if platform.system()=='Windows':
@@ -153,8 +168,8 @@ def status(server,info):
         else:
             server.reply(info,'§4[Mirror]§l镜像服未开启！',encoding=None)
 
-def on_load(server, old_module):
-    server.add_help_message('!!mirror', '§6获取镜像服插件的使用方法')
+# def on_load(server, old_module):
+#     server.add_help_message('!!mirror', '§6获取镜像服插件的使用方法')
 
 def on_info(server,info):
     if info.is_player and info.content == '!!mirror':

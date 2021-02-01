@@ -5,8 +5,21 @@ import os
 import json as js
 import platform
 from os.path import abspath, dirname
-from mcdreforged.utils import rcon
+from mcdreforged.api.rcon import rcon
 import subprocess as s
+from mcdreforged.api.decorator import new_thread
+
+PLUGIN_METADATA = {
+    'id': 'mirror',
+    'version': '1.0.0',
+    'name': 'Mirror Server',  # RText component is allowed
+    'description': 'A mirror server plugin which can help you debug your machine/design your buildings',  # RText component is allowed
+    'author': 'GamerNoTitle',
+    'link': 'https://github.com/GamerNoTitle/MCDR-Mirror-Server',
+    'dependencies': {
+    }
+}
+
 current_path = abspath(dirname(__file__))
 def read_config():
     with open("config/mirror.json") as json_file:
@@ -71,6 +84,7 @@ def helpmsg(server,info):
         server.execute('tellraw '+ info.player + SimpleOP)
         server.execute('tellraw '+ info.player + StartStopHelper)
 
+@new_thread("Mirror-Sync")
 def sync(server,info):
     start_time=datetime.datetime.now()
     server.execute('save-all')
@@ -99,6 +113,7 @@ def sync(server,info):
     end_time=datetime.datetime.now()
     server.say('§6[Mirror]Sync completed in {}'.format(end_time-start_time))
 
+@new_thread("Mirror")
 def start(server,info):
     server.say('§6[Mirror]Mirror server is launching, please wait...')
     if platform.system()=='Windows':
