@@ -5,7 +5,7 @@ import os
 import json as js
 import platform
 from os.path import abspath, dirname
-from utils import rcon
+from mcdreforged.utils import rcon
 import subprocess as s
 current_path = abspath(dirname(__file__))
 def read_config():
