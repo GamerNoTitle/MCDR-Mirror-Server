@@ -5,7 +5,7 @@ import os
 import json as js
 import platform
 from os.path import abspath, dirname
-from mcdreforged.api.rcon import rcon
+import mcdreforged.api.rcon as rconapi
 import subprocess as s
 from mcdreforged.api.decorator import new_thread
 
@@ -51,7 +51,8 @@ else:
         target.append('{}/{}'.format(mirror_folder,world[i-1]))
 
 if(remote_enable):
-    connection=rcon.Rcon(address,port,secret)
+    rconapi.rcon=rconapi.RconConnection(address, port, secret)
+    remote=rconapi.rcon
 
 
 remote_info='''
@@ -130,9 +131,9 @@ def command(server,info):
     if(conf['remote']['command']):
         if(server.get_permission_level(info)>2):
             try:
-                connection.connect()
-                connection.send_command(info.content[14:])
-                connection.disconnect()
+                rconapi.RconConnection.connect(remote)
+                rconapi.RconConnection.send_command(remote,command=info.content[14:])
+                rconapi.RconConnection.disconnect(remote)
                 server.reply(info,'§6[Mirror]Command Sent!', encoding=None)
             except Exception as e:
                 server.reply(info,'§6[Mirror]§4Error: {}'.format(e), encoding=None)
@@ -143,9 +144,9 @@ def command(server,info):
 
 def stop(server,info):
     try:
-        connection.connect()
-        connection.send_command('stop')
-        connection.disconnect()
+        rconapi.RconConnection.connect(remote)
+        rconapi.RconConnection.send_command(remote,'stop')
+        rconapi.RconConnection.disconnect(remote)
     except Exception as e:
         server.reply(info,'§6[Mirror]§4Connection Failed: {}'.format(e), encoding=None)
 
