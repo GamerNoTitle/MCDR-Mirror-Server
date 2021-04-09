@@ -2,6 +2,8 @@
 
 [ENGLISH](#English)
 
+**MCDR1.0+的rcon功能还没适配，所以加载时会报错，不过不影响使用（大概），如果你对rcon功能有要求请看[这里](https://github.com/GamerNoTitle/MCDR-Mirror-Server/tree/Below-1.0)**
+
 这是一个能够让你在MCDR的帮助下开镜像服便于调试的插件（仅支持python3），现已支持1.16+。如果你不懂怎么使用，可以看[这里的例子](https://bili33.top/2020/07/18/MCDR-Mirror-Server-Usage/)
 
 使用`!!mirror`可以呼出帮助菜单
@@ -80,6 +82,8 @@ java -Xmx4G -jar server.jar
 ---
 
 # English
+
+**This plugin has not adapted to rcon function in MCDR1.0+ yet, if you have the requirement of the rcon function, please visit [here](https://github.com/GamerNoTitle/MCDR-Mirror-Server/tree/Below-1.0) **
 
 This is a plugin can help you turn on another mirror server for you to debug or design (**Python3 ONLY**), now supported Minecraft 1.16+
 
