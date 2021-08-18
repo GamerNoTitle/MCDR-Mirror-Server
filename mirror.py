@@ -13,7 +13,7 @@ PLUGIN_METADATA = {
     'id': 'mirror',
     'version': '1.0.0',
     'name': 'Mirror Server',  # RText component is allowed
-    'description': '镜像服插件，为你的红石机器调试/建筑设计更上一层楼！',  # RText component is allowed
+    'description': '镜像服插件，为你的红石机器调试/建筑设计更上一层楼！（暂不支持Rcon相关功能）',  # RText component is allowed
     'author': 'GamerNoTitle',
     'link': 'https://github.com/GamerNoTitle/MCDR-Mirror-Server',
     'dependencies': {
