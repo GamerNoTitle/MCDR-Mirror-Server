@@ -13,7 +13,7 @@ PLUGIN_METADATA = {
     'id': 'mirror',
     'version': '1.0.0',
     'name': 'Mirror Server',  # RText component is allowed
-    'description': 'A mirror server plugin which can help you debug your machine/design your buildings',  # RText component is allowed
+    'description': 'A mirror server plugin which can help you debug your machine/design your buildings (Rcon not support yet)',  # RText component is allowed
     'author': 'GamerNoTitle',
     'link': 'https://github.com/GamerNoTitle/MCDR-Mirror-Server',
     'dependencies': {
