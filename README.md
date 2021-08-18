@@ -1,5 +1,7 @@
 # MCDR-Mirror-Server
 
+如果你正在使用MCDR 0.x，请使用[Below-1.0分支](https://github.com/GamerNoTitle/MCDR-Mirror-Server/tree/Below-1.0)下的插件/If you're using MCDR 0.x, please use the plugin on [Below-1.0 Branch](https://github.com/GamerNoTitle/MCDR-Mirror-Server/tree/Below-1.0)
+
 [ENGLISH](#English)
 
 **MCDR1.0+的rcon功能还没适配，所以加载时会报错，不过不影响使用（大概），如果你对rcon功能有要求请看[这里](https://github.com/GamerNoTitle/MCDR-Mirror-Server/tree/Below-1.0)**
