@@ -1,5 +1,15 @@
 # MCDR-Mirror-Server
 
+## IMPORTANT
+
+Newer version of this plugin can be found -> https://github.com/EMUnion/MirrorServerReforged
+Please move to the new one, thank you.
+
+新版的镜像服插件已经上线了 -> https://github.com/EMUnion/MirrorServerReforged
+请使用新版本并弃用此旧版本，谢谢！
+
+---
+
 如果你正在使用MCDR 0.x，请使用[Below-1.0分支](https://github.com/GamerNoTitle/MCDR-Mirror-Server/tree/Below-1.0)下的插件/If you're using MCDR 0.x, please use the plugin on [Below-1.0 Branch](https://github.com/GamerNoTitle/MCDR-Mirror-Server/tree/Below-1.0)
 
 [ENGLISH](#English)
